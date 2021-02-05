@@ -16,6 +16,10 @@ class GridItem  extends React.Component{
             <div className="grid-item" onClick = {()=> {
                 if (this.props.gameActive === true)
                   this.props.handlePlayerClick(this.props.rowIndex,this.props.colIndex)
+
+                else{
+                    this.props.display(0);
+                }
             }}>
                
                {this.props.col}

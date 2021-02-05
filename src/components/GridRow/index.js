@@ -15,7 +15,7 @@ class GridRow extends React.Component{
                
             {this.props.row.map((cols,colIndex)=>{
                 // console.log("cols are ",{cols});
-               return <GridItem rowIndex = {this.props.rowIndex} gameActive = {this.props.gameActive} col = {cols} colIndex = {colIndex} handlePlayerClick = {this.props.handlePlayerClick} />
+               return <GridItem rowIndex = {this.props.rowIndex} gameActive = {this.props.gameActive} col = {cols} colIndex = {colIndex} handlePlayerClick = {this.props.handlePlayerClick}  display = {this.props.display}/>
             } )}
             </div>
        

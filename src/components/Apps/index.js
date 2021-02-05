@@ -31,24 +31,45 @@ class App extends React.Component{
     }
   }
   
+  display = (winner) => {
+    if (winner === 1)
+    {
+      alert("Congratulations! Player1 wins");
+    }
+    else if (winner === 2)
+    {
+      alert("Congratulations! Player2 wins");    
+    }
+    else{
+      alert("Draw!");
+    }
+  }
   check = ()=>{
     // console.log(this);
     let roundWon = false;
+    this.setState({
+      gameActive : false,
+    });
     this.state.winningConditions.map((row,i) =>{
       let a = this.state.gameState[this.state.winningConditions[i][0][0]][this.state.winningConditions[i][0][1]];
       let b = this.state.gameState[this.state.winningConditions[i][1][0]][this.state.winningConditions[i][1][1]];
       let c = this.state.gameState[this.state.winningConditions[i][2][0]][this.state.winningConditions[i][2][1]];
+      
       // console.log(this.state.winningConditions[i][0][0],this.state.winningConditions[i][0][1]);
       // console.log(this.state.winningConditions[i][1][0],this.state.winningConditions[i][1][1]);
       // console.log(this.state.winningConditions[i][2][0],this.state.winningConditions[i][2][1]);
       // console.log("here we are");
       // console.log("here we are" ,a,b,c);
       if (a === "" || b === "" || c === "")
-      {}
+      {
+        this.setState({
+          gameActive : true,
+        });
+      }
       else if (a === b && b === c){
-          //  alert("hurrray you wonnnnnnn");
+          let playerWon = this.state.playerTurn;
+          this.display((playerWon === "X") ? 1:2);
            this.setState({
-             gameActive : false,
              winner:this.state.playerTurn,
            })
       }
@@ -60,7 +81,7 @@ class App extends React.Component{
 
     if (this.state.gameActive === true && this.state.gameState[rowIndex][colIndex] === "")
     {
-      //  alert(this.state.gameActive); 
+      console.log(this.state.gameActive); 
       const copiedGameState = [...this.state.gameState];
       copiedGameState[rowIndex][colIndex]= this.state.playerTurn;
       this.setState({
@@ -69,12 +90,16 @@ class App extends React.Component{
       });
       this.check();
     }
+    
+    
     // console.log(this.state.gameActive);
     // here gameActive is not changing after it is changed in check function 
     // but next time when the function is called at that time changes are reflected in
     // it;
    
   }
+
+
 
   
   // handlePlayerClick = (rowIndex,cellIndex) => {
@@ -88,7 +113,7 @@ class App extends React.Component{
         <div id = "board">
           {this.state.gameState.map((row,rowIndex) =>( 
             // console.log(row);
-            <GridRow row={row} rowIndex = {rowIndex} gameActive = {this.state.gameActive} handlePlayerClick = {this.handlePlayerClick}  />
+            <GridRow row={row} rowIndex = {rowIndex} gameActive = {this.state.gameActive} handlePlayerClick = {this.handlePlayerClick} display = {this.display} />
           ))}
           
           {/* <GridRow />
