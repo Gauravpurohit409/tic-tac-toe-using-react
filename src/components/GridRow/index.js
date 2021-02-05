@@ -5,16 +5,17 @@ class GridRow extends React.Component{
     constructor(props)
     {
         super(props);
-        console.log("My Index is ",this.props.rowIndex);
+        // console.log("hello i am row",this.props.handlePlayerClick);
     }
     render(){
         // let gridRow = [<GridItem />,<GridItem />,<GridItem />];
 
         return(
             <div className = "grid-row">
+               
             {this.props.row.map((cols,colIndex)=>{
-                console.log("cols are ",{cols});
-               return <GridItem rowIndex = {this.props.rowIndex} col = {cols} colIndex = {colIndex} handlePlayerClick = {this.props.handlePlayerClick} />
+                // console.log("cols are ",{cols});
+               return <GridItem rowIndex = {this.props.rowIndex} gameActive = {this.props.gameActive} col = {cols} colIndex = {colIndex} handlePlayerClick = {this.props.handlePlayerClick} />
             } )}
             </div>
        
